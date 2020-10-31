@@ -2,22 +2,14 @@ package edu.miu.groupx.security.securityservice;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class AuthController {
-
-    @GetMapping("/login")
-    String login() {
-        return "login";
-    }
 
     @GetMapping({"/", "/home"})
     String home() {
-        return "home";
-    }
-
-    @GetMapping("/hello")
-    String hello() {
-        return "hello";
+        return "{home doesn't need authentication}";
     }
 }
