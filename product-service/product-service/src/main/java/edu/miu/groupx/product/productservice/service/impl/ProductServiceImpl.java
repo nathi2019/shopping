@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import edu.miu.groupx.product.productservice.service.SequenceNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,18 +26,39 @@ import edu.miu.groupx.product.productservice.utils.S3Utils;
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
+<<<<<<< HEAD
+	 @Autowired
+	    ProductRepository productRepository;
+	 @Autowired
+	 ProductCatagoryRepository productCatagoryRepository;
+	@Autowired
+	private SequenceNumberService sequenceNumberService;
+=======
 	@Autowired
 	ProductRepository productRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
 	@Autowired
 	ProductWarehouseRepository ProductWarehouseRepo;
+>>>>>>> b7256c84e7c5252921a21e7df85793946420a9af
 
 	@Override
 	public Product save(Product product) {
 		// List<ProductImages> productImages=product.getPictures().g
 
 		Product actualProduct = null;
+<<<<<<< HEAD
+		Long productCategoryId=product.getProductCatagoryId();
+			if(productCategoryId!=null) {
+			ProductCatagory productCatagory=productCatagoryRepository.findById(productCategoryId).get();
+			//how to set the quantity
+				String productSequence=sequenceNumberService.getNextProductNumber();
+				product.setProductNumber(productSequence);
+			product.setProductCatagory(productCatagory);
+			System.out.println(product.getProductCatagory().getId());
+			actualProduct=productRepository.save(product);
+			productCatagory.setQuantity(productCatagory.getQuantity()+1);
+=======
 		Long productCategoryId = product.getProductCatagoryId();
 		Long productWarehouseId = product.getProductWarehouseId();
 		ProductWarehouse productWarehouse = null;
@@ -49,6 +71,7 @@ public class ProductServiceImpl implements ProductService {
 			
 			//product.setCategory(categoryList);
 
+>>>>>>> b7256c84e7c5252921a21e7df85793946420a9af
 		}
 		if (productWarehouseId != null) {
 			productWarehouse = ProductWarehouseRepo.findById(productWarehouseId).get();
